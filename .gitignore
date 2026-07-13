@@ -1,0 +1,5 @@
+# FEW/ folder contains generated outputs (excluded from version control)
+svtraf-dissertation/FEW/data/*.csv
+svtraf-dissertation/FEW/figures/*.png
+svtraf-dissertation/FEW/figures/*.pdf
+svtraf-dissertation/FEW/models/*.pkl
