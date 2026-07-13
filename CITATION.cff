@@ -1,0 +1,57 @@
+cff-version: 1.2.0
+type: software
+title: "SVTRAF: Structured Vulnerability Taxonomy and Risk Assessment Framework"
+abstract: "A blockchain-specific scoring framework for smart contract vulnerability assessment, validated on 150 stratified contracts against real financial-loss ground truth."
+authors:
+  - family-names: "Palani"
+    given-names: "Udhaya Kumar"
+    affiliation: "National College of Ireland"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+version: 1.0.0
+date-released: 2026-08-06
+repository-code: "https://github.com/udhayakumar-palani/svtraf-dissertation"
+license: "CC-BY-4.0"
+keywords:
+  - "smart contracts"
+  - "vulnerability assessment"
+  - "blockchain security"
+  - "risk scoring"
+  - "Ethereum"
+  - "Solidity"
+  - "framework"
+contact:
+  - name: "Udhaya Kumar Palani"
+    email: "udhayakumar@example.com"
+references:
+  - type: article
+    title: "Smart Contract Vulnerabilities: A Comprehensive Taxonomy"
+    authors:
+      - family-names: "Darvishi"
+        given-names: "M."
+    year: 2024
+    journal: "IEEE Transactions on Software Engineering"
+  - type: article
+    title: "Machine Learning for Smart Contract Security"
+    authors:
+      - family-names: "Zhou"
+        given-names: "Y."
+    year: 2023
+    journal: "ACM CCS"
+  - type: article
+    title: "Automated Vulnerability Detection in Blockchain Systems"
+    authors:
+      - family-names: "Chaliasos"
+        given-names: "G."
+    year: 2024
+    journal: "USENIX Security"
+  - type: dataset
+    title: "DeFiHackLabs: Documented DeFi Exploits"
+    authors:
+      - family-names: "Sun"
+        given-names: "W."
+    year: 2024
+    repository-code: "https://github.com/SunWeb3Sec/DeFiHackLabs"
+funding:
+  - funder:
+      name: "National College of Ireland"
+    type: "Academic Research"

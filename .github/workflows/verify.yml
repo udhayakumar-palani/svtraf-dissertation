@@ -1,0 +1,99 @@
+name: Verify Reproducibility
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday
+
+jobs:
+  validate-notebooks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.11']
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Run all notebooks
+        run: |
+          bash run_notebooks.sh
+      
+      - name: Verify outputs
+        run: |
+          python3 verify_results.py --verbose
+      
+      - name: Check data integrity
+        run: |
+          python3 << 'EOF'
+          import pandas as pd
+          
+          # Verify svtraf_scored.csv
+          df = pd.read_csv('svtraf-dissertation/FEW/data/svtraf_scored.csv')
+          assert len(df) == 150, f"Expected 150 contracts, got {len(df)}"
+          assert 'SVTRAF_score' in df.columns, "Missing SVTRAF_score column"
+          assert (df['SVTRAF_score'] >= 0).all() and (df['SVTRAF_score'] <= 10).all(), "Scores out of range"
+          
+          # Verify no missing values
+          assert df.isnull().sum().sum() == 0, "Found missing values"
+          
+          print("✅ Data integrity checks passed")
+          EOF
+      
+      - name: Upload verification report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: verification-${{ matrix.python-version }}
+          path: svtraf-dissertation/FEW/
+
+  check-documentation:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check documentation completeness
+        run: |
+          echo "Checking documentation files..."
+          files=(
+            "README.md"
+            "GETTING_STARTED.md"
+            "CITATION.cff"
+            "requirements.txt"
+            "run_notebooks.sh"
+            "Makefile"
+            "svtraf-dissertation/docs/METHODOLOGY.md"
+            "svtraf-dissertation/docs/RESULTS.md"
+            "svtraf-dissertation/docs/RESEARCH_BACKGROUND.md"
+            "svtraf-dissertation/data/README.md"
+            "svtraf-dissertation/FEW/README.md"
+          )
+          
+          for file in "${files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "❌ Missing: $file"
+              exit 1
+            else
+              echo "✅ Found: $file"
+            fi
+          done
+          
+          echo ""
+          echo "✅ All documentation files present"
