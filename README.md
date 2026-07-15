@@ -1,4 +1,7 @@
-# svtraf-dissertation
+# A Structured Vulnerability Taxonomy and Risk Assessment Framework
+for Blockchain Smart Contracts with Machine Learning-Based Validation
+<img width="468" height="89" alt="image" src="https://github.com/user-attachments/assets/65685a37-2757-49d4-8263-d034f5cdb11d" />
+
 
 ## Results and artifacts
 All generated artifacts (processed datasets, tables, and publication-ready figures) are consolidated in:
