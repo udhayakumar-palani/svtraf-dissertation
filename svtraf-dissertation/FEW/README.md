@@ -2,6 +2,8 @@
 
 Centralized repository for all SVTRAF dissertation outputs, artifacts, and generated results. This folder organizes all framework execution outputs for easy access and thesis integration.
 
+NOTE: For convenience, all generated outputs (figures, tables, and processed data) have been moved to `svtraf-dissertation/results/` to provide a single, easy-to-access location for reviewers and thesis authors. FEW retains metadata, documentation, and archival notes.
+
 ---
 
 ## 📁 Folder Structure
@@ -89,10 +91,13 @@ To regenerate all outputs and refresh FEW folder:
 bash run_notebooks.sh
 
 # Outputs are automatically saved to notebooks/
-# Then manually organize into FEW/ with:
-cp svtraf-dissertation/notebooks/svtraf_scored.csv svtraf-dissertation/FEW/data/
-cp svtraf-dissertation/notebooks/svtraf_dataset.csv svtraf-dissertation/FEW/data/
-cp svtraf-dissertation/notebooks/table_validation_results.csv svtraf-dissertation/FEW/tables/
+# Organize outputs into a single results/ folder for easy access:
+mkdir -p svtraf-dissertation/results/{data,tables,figures}
+cp svtraf-dissertation/notebooks/svtraf_scored.csv svtraf-dissertation/results/data/
+cp svtraf-dissertation/notebooks/svtraf_dataset.csv svtraf-dissertation/results/data/
+cp svtraf-dissertation/notebooks/table_validation_results.csv svtraf-dissertation/results/tables/
+# Or use the provided Makefile target:
+make run && make verify
 ```
 
 **Expected runtime:** ~69 seconds

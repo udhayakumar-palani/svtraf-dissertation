@@ -1,16 +1,16 @@
 # FEW Outputs — Quick Access
 
-## 📊 Data Files (FEW/data/)
+## 📊 Data Files (svtraf-dissertation/results/data/)
 
 ### `svtraf_scored.csv` — Main Output
 150 smart contracts with final SVTRAF scores and components.
 
 ```bash
 # Quick preview
-head -5 FEW/data/svtraf_scored.csv
+head -5 svtraf-dissertation/results/data/svtraf_scored.csv
 
 # Get statistics
-python3 -c "import pandas as pd; print(pd.read_csv('FEW/data/svtraf_scored.csv')[['SVTRAF_score', 'financial_loss_usd']].describe())"
+python3 -c "import pandas as pd; print(pd.read_csv('svtraf-dissertation/results/data/svtraf_scored.csv')[['svtraf_score', 'financial_loss_usd']].describe())"
 ```
 
 **Columns:** contract_id, category, source, ISC, ESC, AMP, INT, SVTRAF_score, financial_loss_usd
@@ -38,7 +38,7 @@ Original 150-contract dataset (for comparison/auditing).
 
 ---
 
-## 📈 Tables (FEW/tables/)
+## 📈 Tables (svtraf-dissertation/results/tables/)
 
 ### `table_validation_results.csv` — Performance Metrics
 
@@ -60,7 +60,7 @@ Comparison: SVTRAF vs CVSS v3.1 vs BVSS vs Ahmad et al.
 ## 📁 Folder Structure
 
 ```
-FEW/
+results/
 ├── data/              ← Processed datasets
 │   ├── svtraf_scored.csv
 │   ├── svtraf_dataset.csv
@@ -69,16 +69,17 @@ FEW/
 ├── tables/            ← Statistical results
 │   └── table_validation_results.csv
 │
-├── figures/           ← Plots & visualizations (populate before submission)
-│   ├── distribution_svtraf.png
-│   ├── scatter_vs_loss.png
-│   ├── comparison_frameworks.png
-│   └── statistical_validation.png
+├── figures/           ← Plots & visualizations (publication-ready)
+│   ├── 01_svtraf_distribution.png
+│   ├── 02_scatter_svtraf_vs_loss.png
+│   ├── 03_category_breakdown.png
+│   ├── 04_svtraf_vs_cvss.png
+│   └── 05_top10_losses.png
 │
 ├── models/            ← Serialized objects (optional)
 │   └── (empty or checkpoints)
 │
-├── README.md          ← Full documentation
+├── README.md          ← Full documentation (archival in FEW/README.md)
 └── INDEX.md           ← This file
 ```
 
